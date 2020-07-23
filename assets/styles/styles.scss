@@ -1,0 +1,186 @@
+// Primary
+
+$cyan: hsl(179, 62%, 43%);
+$bright_yellow: hsl(71, 73%, 54%);
+
+// Neutral
+
+$light_gray: hsl(204, 43%, 93%);
+$grayish_blue: hsl(218, 22%, 67%);
+
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;1,700&display=swap');
+
+$breakpoints: (
+  s: 480px,
+  l: 680px,
+  x: 768px,
+  xl: 960px,
+  xx: 1024px,
+);
+
+@mixin from($bp) {
+  @if map-has-key($breakpoints, $bp) {
+    @media screen and (min-width: map-get($breakpoints , $bp )) {
+      @content;
+    }
+  } @else {
+    @media screen and (min-width: $bp) {
+      @content;
+    }
+  }
+}
+
+$devMode: false;
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  @if ($devMode == true) {
+    border: 1px solid #000;
+  }
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  font-family: 'Karla', sans-serif;
+  font-size: 1.7rem;
+  background: $light_gray;
+  min-height: 100vh;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.section-table {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(6, 130px);
+  width: 100%;
+  padding: 3rem 2rem 1rem 2rem;
+  border-radius: 1rem;
+  @include from(x) {
+    width: 70%;
+    grid-template-rows: repeat(4, 150px);
+    padding: 0;
+    box-shadow: 0 1rem 2rem hsla(0, 0%, 0%, 0.308);
+  }
+
+  &__main {
+    background: #fff;
+    grid-column: span 8;
+    grid-row: span 2;
+    padding: 2rem 2rem;
+
+    @include from(x) {
+      border-top-left-radius: 1rem;
+      border-top-right-radius: 1rem;
+      padding: 2rem;
+    }
+  }
+  &__price {
+    background: darken($cyan, 4);
+    grid-column: span 8;
+    grid-row: span 2;
+    padding: 2rem;
+    color: #fff;
+    @include from(x) {
+      border-bottom-left-radius: 1rem;
+      grid-column: span 4;
+      padding: 3.5rem;
+    }
+  }
+  &__inf {
+    background: $cyan;
+    grid-column: span 8;
+    grid-row: span 2;
+    padding: 2rem 0 0 2rem;
+    color: #fff;
+    @include from(x) {
+      grid-column: span 4;
+      border-bottom-right-radius: 1rem;
+      padding-left: 3rem;
+    }
+  }
+}
+.main-title_main-section {
+  color: $cyan;
+  font-size: 1.9rem;
+  font-weight: bold;
+  @include from(x) {
+    margin-top: 2rem;
+    font-size: 3rem;
+  }
+}
+.subtitle_main-section {
+  color: $bright_yellow;
+  font-size: 1.7rem;
+  margin-top: 2rem;
+  @include from(x) {
+    font-size: 2rem;
+  }
+}
+.paragraph_main-section {
+  color: $grayish_blue;
+  margin-top: 2rem;
+  letter-spacing: 1px;
+  @include from(x) {
+    font-size: 2rem;
+    width: 80%;
+  }
+}
+.main-title_price-info {
+  font-size: 2rem;
+}
+.subtitle_price-info {
+  font-size: 3rem;
+  margin-top: 2rem;
+  > small {
+    font-size: 1.6rem;
+    color: darken(#fff, 10);
+  }
+}
+.paragraph_price-info {
+  font-size: 1.8rem;
+  margin-top: 1.6rem;
+}
+.btn {
+  outline: none;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  font-size: 1.9rem;
+  cursor: pointer;
+}
+.btn-green {
+  background: $bright_yellow;
+  margin-top: 2rem;
+  width: 100%;
+  box-shadow: 0 1rem 1rem darken($cyan, 10);
+  &:active {
+    transform: scale(0.98);
+  }
+}
+.main-title_data-info {
+  margin-top: 2rem;
+  font-size: 1.9rem;
+  @include from(x) {
+    font-size: 2.2rem;
+  }
+}
+.paragraph_data-info {
+  margin-top: 2rem;
+  text-align: left;
+  width: 70%;
+
+  @include from(xl) {
+    font-size: 2rem;
+  }
+}
